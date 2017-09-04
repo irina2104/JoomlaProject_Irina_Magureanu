@@ -1,3 +1,5 @@
+package com.endava.pages;
+
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -14,58 +16,52 @@ public class EditProfilePage {
         this.driver = driver;
     }
 
-    @FindBy(xpath = ".//*[@id='jform_params_editor_chzn']/a")
+    @FindBy(css = "#jform_params_editor_chzn .chzn-single")
     private WebElement dropDownEdit;
-    @FindBy(xpath = ".//*[@id='jform_params_editor_chzn']/div/ul")
+    @FindBy(css = "#jform_params_editor_chzn .chzn-drop")
     private WebElement editorPopUp;
-    @FindBy(xpath = ".//*[@id='jform_params_editor_chzn']/div/ul/li")
+    @FindBy(css = "#jform_params_editor_chzn .chzn-drop li")
     private List<WebElement> editorList;
 
-    @FindBy(xpath = ".//*[@id='jform_params_timezone_chzn']/a")
+    @FindBy(css = "#jform_params_timezone_chzn .chzn-single")
     private WebElement timeZoneField;
-    @FindBy(xpath = ".//*[@id='jform_params_timezone_chzn']/div")
+    @FindBy(css = "#jform_params_timezone_chzn .chzn-drop")
     private WebElement timeZonePopUp;
-    @FindBy(xpath = ".//*[@id='jform_params_timezone_chzn']/div/div/input")
+    @FindBy(css = "#jform_params_timezone_chzn .chzn-search input")
     private WebElement timeZoneInput;
 
-    @FindBy(xpath = ".//*[@id='jform_params_language_chzn']/a")
+    @FindBy(css = "#jform_params_language_chzn .chzn-single")
     private WebElement dropDownFrontend;
-    @FindBy(xpath = ".//*[@id='jform_params_language_chzn']/div/ul")
+    @FindBy(css = "#jform_params_language_chzn .chzn-drop")
     private WebElement frontendPopUp;
-    @FindBy(xpath = ".//*[@id='jform_params_language_chzn']/div/ul/li")
+    @FindBy(css = "#jform_params_language_chzn .chzn-results li")
     private List<WebElement> frontendLanguageList;
 
-    @FindBy(xpath = ".//*[@id='jform_params_admin_style_chzn']/a")
+    @FindBy(css = "#jform_params_admin_style_chzn .chzn-single")
     private WebElement dropDownBackendTem;
-    @FindBy(xpath = ".//*[@id='jform_params_admin_style_chzn']/div/ul")
+    @FindBy(css = "#jform_params_admin_style_chzn .chzn-drop")
     private WebElement backendTemPopUp;
-    @FindBy(xpath = ".//*[@id='jform_params_admin_style_chzn']/div/ul/li[contains(@class,'active-result')]")
+    @FindBy(css = "#jform_params_admin_style_chzn .chzn-results li")
     private List<WebElement> backendTemplateList;
 
-    @FindBy(xpath = ".//*[@id='jform_params_admin_style_chzn']/a")
+    @FindBy(css = "#jform_params_admin_language_chzn .chzn-single")
     private WebElement dropDownBackendLang;
-    @FindBy(xpath = ".//*[@id='jform_params_admin_language_chzn']/div/ul")
+    @FindBy(css = "#jform_params_admin_language_chzn .chzn-drop")
     private WebElement backendLangPopUp;
-    @FindBy(xpath = ".//*[@id='jform_params_admin_language_chzn']/div/ul/li")
+    @FindBy(css = "#jform_params_admin_language_chzn .chzn-drop li")
     private List<WebElement> backendLanguageList;
 
-    @FindBy(xpath = ".//*[@id='jform_params_helpsite_chzn']/a")
+    @FindBy(css = "#jform_params_helpsite_chzn .chzn-single")
     private WebElement dropDownHelp;
-    @FindBy(xpath = ".//*[@id='jform_params_helpsite_chzn']/div/ul")
+    @FindBy(css = "#jform_params_helpsite_chzn .chzn-drop")
     private WebElement helpPopUp;
-    @FindBy(xpath = ".//*[@id='jform_params_helpsite_chzn']/div/ul/li")
+    @FindBy(css = "#jform_params_helpsite_chzn .chzn-drop li")
     private List<WebElement> helpSiteList;
 
-    @FindBy(xpath = ".//*[@id='helpsite-refresh']")
-    private WebElement refreshButton;
-
-    @FindBy(xpath = ".//*[@id='member-profile']/div/div/button")
+    @FindBy(css = ".controls .btn.btn-primary.validate")
     private WebElement submitButton;
 
-    @FindBy(xpath = ".//*[@id='member-profile']/div/div/a")
-    private WebElement cancelButton;
-
-    public void basicSettings(int i, String zone, int index, int nr, int no, int cnt) {
+   public void basicSettings(int i, String zone, int index, int nr, int no, int cnt) {
         WebDriverWait wait = new WebDriverWait(driver, 2000);
         //wait.until(ExpectedConditions.visibilityOf(dropDownEdit));
         dropDownEdit.click();
@@ -78,7 +74,7 @@ public class EditProfilePage {
             timeZoneInput.sendKeys(zone);
             timeZoneInput.sendKeys(Keys.ENTER);
         }
-        //  wait.until(ExpectedConditions.visibilityOf(dropDownFrontend));
+         wait.until(ExpectedConditions.visibilityOf(dropDownFrontend));
 
         dropDownFrontend.click();
         if (frontendPopUp.isDisplayed()) frontendLanguageList.get(index).click();
@@ -88,7 +84,7 @@ public class EditProfilePage {
 
         if (backendTemPopUp.isDisplayed()) {
             wait.until(ExpectedConditions.elementToBeClickable(backendTemplateList.get(nr)));
-            // backendTemplateList.get(nr).click();
+             backendTemplateList.get(nr).click();
         }
         wait.until(ExpectedConditions.elementToBeClickable(dropDownBackendLang));
 

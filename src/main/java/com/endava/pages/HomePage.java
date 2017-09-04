@@ -1,4 +1,6 @@
-import org.junit.Assert;
+package com.endava.pages;
+
+import com.endava.pages.AfterLoginPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -10,19 +12,19 @@ public class HomePage {
 
     public WebDriver driver;
 
-    @FindBy(css = ".site-title")
+    @FindBy(className = "site-title")
     private WebElement siteTitle;
 
-    @FindBy(css = "#modlgn-username")
+    @FindBy(id = "modlgn-username")
     private WebElement username;
 
-    @FindBy(css = "#modlgn-passwd")
+    @FindBy(id = "modlgn-passwd")
     private WebElement password;
 
     @FindBy(css = ".btn.btn-primary.login-button")
     private WebElement loginButton;
 
-    @FindBy(css = ".login-greeting")
+    @FindBy(className = "login-greeting")
     private WebElement loginGreeting;
 
     @FindBy(css = ".logout-button input")
@@ -32,28 +34,24 @@ public class HomePage {
         this.driver = driver;
     }
 
-    public void verifyTitle(String user) {
-        siteTitle.isDisplayed();
-        Assert.assertThat(siteTitle.isDisplayed(), is(true));
-        Assert.assertEquals(user, siteTitle.getText());
-    }
-
-    public AfterLoginPage login(String user, String pass, String greeting) {
-        Assert.assertThat(username.isDisplayed(), is(true));
+    public AfterLoginPage login(String user, String pass) {
         username.click();
         username.sendKeys(user);
-        Assert.assertThat(password.isDisplayed(), is(true));
         password.click();
         password.sendKeys(pass);
-        Assert.assertThat(loginButton.isDisplayed(), is(true));
         loginButton.click();
-        Assert.assertThat(loginGreeting.isDisplayed(), is(true));
-        Assert.assertEquals(greeting, loginGreeting.getText());
         return PageFactory.initElements(driver, AfterLoginPage.class);
     }
 
+    public Boolean greeting(){
+        return loginGreeting.isDisplayed();
+    }
+
+    public String verifyTitle(){
+        return siteTitle.getText();
+    }
+
     public AfterLoginPage logout() {
-        Assert.assertThat(logoutButton.isDisplayed(), is(true));
         logoutButton.click();
         return PageFactory.initElements(driver, AfterLoginPage.class);
     }
